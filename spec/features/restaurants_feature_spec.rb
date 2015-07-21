@@ -60,7 +60,7 @@ feature 'restaurants' do
 
     before {Restaurant.create name: 'KFC'}
 
-    scenario 'removes a restaurant when a user clicks a delte link' do
+    scenario 'removes a restaurant when a user clicks a delete link' do
       visit '/restaurants'
       click_link 'Delete KFC'
       expect(page).not_to have_content 'KFC'
