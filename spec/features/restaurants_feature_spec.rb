@@ -30,7 +30,7 @@ feature 'restaurants' do
 
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
       sign_up_in
-      # visit '/restaurants'
+      visit '/restaurants'
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'Nandos'
       click_button 'Create Restaurant'
@@ -41,7 +41,7 @@ feature 'restaurants' do
       context 'an invalid restaurant' do
         scenario 'does not let you submit a name that is too short' do
           sign_up_in
-          # visit '/restaurants'
+          visit '/restaurants'
           click_link 'Add a restaurant'
           fill_in 'Name', with: 'kf'
           click_button 'Create Restaurant'
@@ -65,11 +65,16 @@ feature 'restaurants' do
   end
 
   context 'editing restaurants' do
-    before {Restaurant.create name: 'Nandos'}
+    # before {Restaurant.create name: 'Nandos'}
+    before do
+      sign_up_in
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'Nandos'
+      click_button 'Create Restaurant'
+    end
 
     scenario 'let a user edit a restaurant' do
-      sign_up_in
-      # visit '/restaurants'
+      visit '/restaurants'
       click_link 'Edit Nandos'
       fill_in 'Name', with: 'Nandos awesome chicken'
       click_button 'Update Restaurant'
@@ -79,13 +84,17 @@ feature 'restaurants' do
   end
 
 
-
   context 'deleting restaurants' do
-    before {Restaurant.create name: 'KFC'}
+    before do
+      sign_up_in
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+    end
 
     scenario 'removes a restaurant when a user clicks a delete link' do
-      sign_up_in
-      # visit '/restaurants'
+      # sign_up_in
+      visit '/restaurants'
       click_link 'Delete KFC'
       expect(page).not_to have_content 'KFC'
       expect(page).to have_content 'Restaurant deleted successfully'
@@ -98,7 +107,6 @@ feature 'restaurants' do
     fill_in('Password', with: 'testtest')
     fill_in('Password confirmation', with: 'testtest')
     click_button('Sign up')
-    expect(current_path).to eq '/' # needed or not?
   end
 
 end

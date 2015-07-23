@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 feature 'reviewing' do
-  before {Restaurant.create name: 'KFC'}
+  before do
+    sign_up_in
+    click_link 'Add a restaurant'
+    fill_in 'Name', with: 'KFC'
+    click_button 'Create Restaurant'
+  end
 
   scenario 'allows users to leave a review using a form' do
     visit '/restaurants'
@@ -14,7 +19,7 @@ feature 'reviewing' do
   end
 
   scenario 'deleting a restaurant also deletes the associated review' do
-    sign_up_in
+    # sign_up_in
     delete_restaurant
     expect(page).to have_content 'Restaurant deleted successfully'
     expect(page).not_to have_content 'KFC'

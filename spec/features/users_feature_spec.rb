@@ -52,7 +52,22 @@ feature 'Once logged in users' do
     sign_up_user2
     click_link 'Edit Nandos'
     expect(current_path).to eq '/'
-    expect(page).to have_content 'you are not allowed to edit this restaurant'
+    expect(page).to have_content 'You are not allowed to edit this restaurant'
+  end
+
+  scenario 'they can delete their restaurants' do
+    sign_up_user1
+    click_link('Add a restaurant')
+    fill_in 'Name', with: 'Nandos'
+    click_button 'Create Restaurant'
+    expect(page).to have_content 'Nandos'
+    expect(current_path).to eq '/restaurants'
+    click_link('Sign out')
+    expect(current_path).to eq '/'
+    sign_up_user2
+    click_link 'Delete Nandos'
+    expect(current_path).to eq '/'
+    expect(page).to have_content 'You are not allowed to delete this restaurant'
   end
 
   def sign_up_user1
