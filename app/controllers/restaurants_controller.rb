@@ -61,7 +61,7 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
-    if current_user.id == @restaurant.user_id
+    if @restaurant.user == current_user
       @restaurant.destroy
       flash[:notice] = 'Restaurant deleted successfully'
       redirect_to '/restaurants'

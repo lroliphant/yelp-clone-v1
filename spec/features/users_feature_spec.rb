@@ -70,6 +70,24 @@ feature 'Once logged in users' do
     expect(page).to have_content 'You are not allowed to delete this restaurant'
   end
 
+  # scenario 'they can only leave one review per restaurant' do
+  #   sign_up_user1
+  #   click_link('Add a restaurant')
+  #   fill_in 'Name', with: 'Nandos'
+  #   click_button 'Create Restaurant'
+  #   expect(page).to have_content 'Nandos'
+  #   expect(current_path).to eq '/restaurants'
+  #   click_link('Review Nandos')
+  #   fill_in "Thoughts", with: "so so"
+  #   click_button 'Leave Review'
+  #   expect(current_path).to eq '/restaurants'
+  #   click_link('Review Nandos')
+  #   fill_in "Thoughts", with: "fabby"
+  #   click_button 'Leave Review'
+  #   expect(page).to have_content 'You have already reviewed this restaurant'
+  #   expect(page).not_to have_content 'fabby'
+  # end
+
   def sign_up_user1
     visit('/users/sign_up')
     fill_in('Email', with: 'test@example.com')
