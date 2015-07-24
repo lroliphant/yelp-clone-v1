@@ -5,20 +5,43 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
 
-  <% if user_signed_in? %>
-    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign in", new_user_session_path %>
-    <%= link_to "Sign up", new_user_registration_path %>
-    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-  <% end %>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 
-  <%= notice %>
-  <%= alert %>
-  <%= yield %>
 
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">yelp clone</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/restaurants">restaurants</a></li>
+        </ul>
+      </div>
+      <div>
+        <% if user_signed_in? %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path %>
+          <%= link_to "Sign up", new_user_registration_path %>
+          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+        <% end %>
+
+        <%= notice %>
+        <%= alert %>
+        <%= yield %>
+      </div>
+    </div>
+  </nav>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
